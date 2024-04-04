@@ -59,8 +59,8 @@ function checkWinner(PlayerH, PlayerC) {
 }
 
 function logWins(){
-   let userWins = winners.filter((item) => item == "Player").length;
-   let computerWins = winners.filter((item) => item == "Computer").length;
+   let userWins = winners.filter((item) => item == "PlayerH").length;
+   let computerWins = winners.filter((item) => item == "Player").length;
    let tied = winners.filter((item) => item == "Tie").length;
    console.log("Results:");
    console.log("You Win:", userWins);
@@ -68,6 +68,12 @@ function logWins(){
    console.log("Draw:", tied);
 }
 
+/**
+ * @param {string} playerChoice
+ * @param {string} computerChoice
+ * @param {string} winner
+ * @param {any} round
+ */
 function logRound(playerChoice, computerChoice, winner,round) {
   console.log('Round:', round)
   console.log('Choose item:', playerChoice)
