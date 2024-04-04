@@ -1,3 +1,6 @@
 {
-  "liveServer.settings.port": 5502
+  "liveServer.settings.port": 5502,
+  "js/ts.implicitProjectConfig.strictFunctionTypes": false,
+  "js/ts.implicitProjectConfig.strictNullChecks": false,
+  "js/ts.implicitProjectConfig.experimentalDecorators": false
 }
