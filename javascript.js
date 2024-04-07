@@ -1,56 +1,57 @@
 const choices = ["rock", "paper", "sissors"];
+const userDisplay = document.getElementById("userDisplay");
+const computerDisplay = document.getElementById("computerDisplay");
+const resultDisplay = document.getElementById("resultDisplay");
+const playerScoreDisplay = document.getElementById("playerScoreDisplay");
+const computerScoreDisplay = document.getElementById("computerScoreDisplay");
+let playerScore = 0;
+let computerScore = 0;
 
 
 function getComputerChoice() {
-   const  pick = choices[Math.floor(Math.random()* choices.length)];
+   const  pick = choices[Math.floor(Math.random()*3)];
    return pick;
 }
 
-function checkWinner(playerSelection, computerSelection) {
- if(playerSelection == computerSelection) {
-  return "Tie";
- } else if (
-      (playerSelection == "rock" && computerSelection == "sissors") ||
-      (playerSelection == "sissors" && computerSelection == "paper") ||
-      (playerSelection == "paper" && computerSelection == "rock")
- ){
-  return "Player";
- }
- else {
-  return "Computer";
- }
-}
 
-function playRound() {
-  const result = checkWinner(playerSelection, computerSelection);
-  if(result == "Tie"){
-    return "It's a Tie!"
-  }
-  else if(result == "Player"){
-    return `You win! ${playerSelection} beats ${computerSelection}`
-  }
-  else {
-    return `You Lose! ${computerSelection} beats ${playerSelection}`
-  }
-}
-
-function getPlayerChoice() {
-  let validatedInput = false;
-  while(validatedInput == false){
-    const choice = prompt("Rock Paper Sissors");
-    if(choice == null) {
-      continue;
+function playRound(playerChoice){
+  const computerSelection = getComputerChoice();
+  let result = "";
+ 
+  if(playerChoice == computerSelection) {
+    result = "IT'S A TIE!";
+  } else {
+    switch(playerChoice) {
+      case "rock":
+        result = (computerSelection == "sissors")? "YOU WIN!" : "YOU LOSE!";
+        break;
+      case "paper":
+        result = (computerSelection == "rock")? "YOU WIN!" : "YOU LOSE!";
+        break;
+      case "sissors":
+        result = (computerSelection == "paper")? "YOU WIN!" : "YOU LOSE!";
+        break;
+      }
+      
     }
-    const choiceInLower = choice.toLowerCase();
-    if(choices.includes(choiceInLower)){
-      validatedInput = true;
-      return choiceInLower;
 
+    userDisplay.textContent = `Player: ${playerChoice}`;
+    computerDisplay.textContent = `Computer: ${computerSelection}`;
+    resultDisplay.textContent = result;
+
+
+    switch(result) {
+      case "YOU WIN!":
+        resultDisplay.classList.add("greenText");
+        playerScore++;
+        playerScoreDisplay.textContent = playerScore;
+        break;
+      case "YOU LOSE!":
+        resultDisplay.classList.add("redText");
+        computerScore++;
+        computerScoreDisplay.textContent = computerScore;
+        break;
     }
   }
-}
+   
 
-
-const playerSelection = getPlayerChoice();
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
